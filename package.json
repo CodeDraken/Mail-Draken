@@ -15,6 +15,7 @@
   "dependencies": {
     "express": "^4.15.4",
     "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
