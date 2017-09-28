@@ -23,7 +23,8 @@ passport.deserializeUser((id, done) => {
 // auth with google
 passport.use(new GoogleStrategy({
   ...keys.google,
-  callbackURL: '/auth/google/callback'
+  callbackURL: '/auth/google/callback',
+  proxy: true
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ googleId: profile.id })
     .then(existingUser => {
@@ -43,7 +44,8 @@ passport.use(new GoogleStrategy({
 // auth with GitHub
 passport.use(new GithubStrategy({
   ...keys.github,
-  callbackURL: '/auth/github/callback'
+  callbackURL: '/auth/github/callback',
+  proxy: true
 }, (accessToken, refreshToken, profile, done) => {
   User.findOne({ githubId: profile.id })
     .then(existingUser => {
