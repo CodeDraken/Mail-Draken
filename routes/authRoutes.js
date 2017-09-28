@@ -17,4 +17,14 @@ module.exports = (app) => {
   app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' })
   )
+
+  app.get('/api/current_user', (req, res) => {
+    res.send(req.user)
+  })
+
+  app.get('/api/logout', (req, res) => {
+    // kills the cookie
+    req.logout()
+    res.send(req.user)
+  })
 }

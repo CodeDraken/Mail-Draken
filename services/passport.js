@@ -30,7 +30,11 @@ passport.use(new GoogleStrategy({
       if (existingUser) {
         done(null, existingUser)
       } else {
-        new User({ googleId: profile.id }).save()
+        new User({
+          googleId: profile.id,
+          email: profile.emails[0].value || null,
+          githubId: null
+        }).save()
           .then(user => done(null, user))
       }
     })
@@ -46,7 +50,11 @@ passport.use(new GithubStrategy({
       if (existingUser) {
         done(null, existingUser)
       } else {
-        new User({ githubId: profile.id }).save()
+        new User({
+          githubId: profile.id,
+          email: profile.email || null,
+          googleId: null
+        }).save()
           .then(user => done(null, user))
       }
     })
