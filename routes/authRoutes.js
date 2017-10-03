@@ -8,14 +8,22 @@ module.exports = (app) => {
   }))
 
   // use code in url
-  app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' })
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
   )
 
   app.get('/auth/github', passport.authenticate('github'))
 
-  app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' })
+  app.get(
+    '/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
+    (req, res) => {
+      res.redirect('/surveys')
+    }
   )
 
   app.get('/api/current_user', (req, res) => {
@@ -25,6 +33,6 @@ module.exports = (app) => {
   app.get('/api/logout', (req, res) => {
     // kills the cookie
     req.logout()
-    res.send(req.user)
+    res.redirect('/')
   })
 }
