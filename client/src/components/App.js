@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import routes from '../routes'
+import routes from './routes'
+import Header from './Header'
+import * as actions from '../actions'
 
-const Header = () => <h2>Header</h2>
+class App extends Component {
+  static PropTypes = {
+    getCurrentUser: PropTypes.func.isRequired
+  }
+  componentDidMount () {
+    this.props.getCurrentUser()
+  }
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <BrowserRouter>
-        { routes }
-      </BrowserRouter>
-    </div>
-  )
+  render () {
+    return (
+      <div>
+        <Header />
+        <div className='container'>
+          <BrowserRouter>
+            { routes }
+          </BrowserRouter>
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App
+export default connect(null, actions)(App)
