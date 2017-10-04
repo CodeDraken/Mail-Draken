@@ -8,7 +8,7 @@ import Header from './Header'
 import * as actions from '../actions'
 
 class App extends Component {
-  static PropTypes = {
+  static propTypes = {
     getCurrentUser: PropTypes.func.isRequired
   }
   componentDidMount () {

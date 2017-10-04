@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-class Header extends Component {
-  static PropTypes = {
+export class Header extends Component {
+  static propTypes = {
     auth: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.object
@@ -20,7 +20,7 @@ class Header extends Component {
           <li><a href='/auth/google'>Login</a></li>
         )
       default:
-        return <li><a href='/api/logout'>Logout</a></li>
+        return <li><a className='btn--logout' href='/api/logout'>Logout</a></li>
     }
   }
 
