@@ -10,6 +10,9 @@
       "target": "http://localhost:5000"
     }
   },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "materialize-css": "^0.100.2",
@@ -27,5 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1"
   }
 }

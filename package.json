@@ -8,6 +8,9 @@
     "node": "8.4.0",
     "npm": "5.4.2"
   },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "scripts": {
     "start": "node index.js",
     "start-watch": "nodemon index.js",
@@ -23,6 +26,7 @@
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.1",
     "concurrently": "^3.5.0",
     "mocha": "^3.5.3",
     "nodemon": "^1.12.1"
