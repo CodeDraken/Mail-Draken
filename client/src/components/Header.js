@@ -8,7 +8,7 @@ export class Header extends Component {
     auth: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.object
-    ]).isRequired
+    ])
   }
 
   renderContent () {
