@@ -1,6 +1,6 @@
 const passport = require('passport')
 
-module.exports = (app) => {
+module.exports = app => {
   // start google signin
   app.get('/auth/google',
   passport.authenticate('google', {

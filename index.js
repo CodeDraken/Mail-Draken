@@ -6,7 +6,8 @@ const passport = require('passport')
 const keys = require('./config/keys')
 
 require('./models/User')
-require('./services/passport') // passport config
+// passport config
+require('./services/passport')
 
 mongoose.connect(keys.mongoURI)
 
@@ -26,7 +27,11 @@ app.use(passport.initialize())
 // persistent login sessions
 app.use(passport.session())
 
-require('./routes/authRoutes')(app) // authentication routes
+// authentication routes
+require('./routes/authRoutes')(app)
+
+// billing routes
+require('./routes/billingRoutes')(app)
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
