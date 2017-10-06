@@ -24,7 +24,10 @@ export class Header extends Component {
       default:
         return [
           <li key='1'><Payments /></li>,
-          <li key='2'><a className='btn--logout' href='/api/logout'>Logout</a></li>
+          <li key='2' style={{ margin: '0 10px' }}>
+            <strong>Credits:</strong> { this.props.auth.credits }
+          </li>,
+          <li key='3'><a className='btn--logout' href='/api/logout'>Logout</a></li>
         ]
     }
   }

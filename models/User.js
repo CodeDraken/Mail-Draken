@@ -7,7 +7,11 @@ const { Schema } = mongoose
 const userSchema = new Schema({
   email: String,
   googleId: String,
-  githubId: String
+  githubId: String,
+  credits: {
+    type: Number,
+    default: 0
+  }
 })
 
 // creates a collection called users and uses the schema

@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
+const bodyParser = require('body-parser')
 
 const keys = require('./config/keys')
 
@@ -12,6 +13,8 @@ require('./services/passport')
 mongoose.connect(keys.mongoURI)
 
 const app = express()
+
+app.use(bodyParser.json())
 
 // This middleware will attach the property session to req
 app.use(
