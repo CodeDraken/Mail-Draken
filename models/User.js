@@ -15,4 +15,4 @@ const userSchema = new Schema({
 })
 
 // creates a collection called users and uses the schema
-mongoose.model('users', userSchema)
+mongoose.model('User', userSchema)
