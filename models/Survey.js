@@ -8,4 +8,4 @@ const surveySchema = new Schema({
   recipients: [ String ]
 })
 
-mongoose.model('Survey', surveySchema)
+module.exports = mongoose.model('Survey', surveySchema)

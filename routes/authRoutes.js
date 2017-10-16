@@ -1,5 +1,7 @@
 const passport = require('passport')
 
+const authController = require('../controllers/authController')
+
 module.exports = app => {
   // start google signin
   app.get('/auth/google',
@@ -11,9 +13,7 @@ module.exports = app => {
   app.get(
     '/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
-    (req, res) => {
-      res.redirect('/surveys')
-    }
+    authController.googleCallback
   )
 
   app.get('/auth/github', passport.authenticate('github'))
@@ -21,18 +21,10 @@ module.exports = app => {
   app.get(
     '/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
-    (req, res) => {
-      res.redirect('/surveys')
-    }
+    authController.githubCallback
   )
 
-  app.get('/api/current_user', (req, res) => {
-    res.send(req.user)
-  })
+  app.get('/api/current_user', authController.currentUser)
 
-  app.get('/api/logout', (req, res) => {
-    // kills the cookie
-    req.logout()
-    res.redirect('/')
-  })
+  app.get('/api/logout', authController.logout)
 }
