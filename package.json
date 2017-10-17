@@ -5,7 +5,7 @@
   "author": "CodeDraken",
   "license": "MIT",
   "engines": {
-    "node": "8.4.0",
+    "node": "8.6.0",
     "npm": "5.4.2"
   },
   "standard": {
@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node index.js",
     "start-watch": "nodemon index.js",
-    "client": "npm start --prefix client",
+    "client": "cd client && yarn start",
     "dev": "concurrently \"yarn start-watch\" \"yarn client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -26,6 +26,7 @@
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
     "passport-google-oauth20": "^1.0.0",
+    "sendgrid": "^5.2.3",
     "stripe": "^5.1.1"
   },
   "devDependencies": {

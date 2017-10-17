@@ -1,8 +1,10 @@
 const { Survey } = require('../models')
+const Mailer = require('../services/Mailer')
+const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 
 const surveyController = {
   // create survey & send
-  async post (req, res) {
+  async newSurvey (req, res) {
     try {
       const { title, subject, body, recipients } = req.body
       const survey = new Survey({
@@ -14,7 +16,7 @@ const surveyController = {
         dateSent: Date.now()
       })
 
-      // TODO: send survey & save
+      const mailer = new Mailer(survey, surveyTemplate(survey))
     } catch (err) {
       res.status(400).send()
     }
