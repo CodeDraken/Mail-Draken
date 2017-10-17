@@ -1,4 +1,4 @@
-const requireLogin = require('../middlewares/requireLogin')
+const requireLogin = require('../middleware/requireLogin')
 const billingController = require('../controllers/billingController')
 
 module.exports = app => {

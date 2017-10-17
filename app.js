@@ -40,6 +40,9 @@ require('./routes/authRoutes')(app)
 // billing routes
 require('./routes/billingRoutes')(app)
 
+// survey routes
+require('./routes/surveyRoutes')(app)
+
 // production only & happens after other routes
 if (process.env.NODE_ENV === 'production') {
   // serve production assets ( main.js, main.css, etc )
