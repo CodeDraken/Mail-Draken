@@ -17,6 +17,7 @@ const surveyController = {
       })
 
       const mailer = new Mailer(survey, surveyTemplate(survey))
+      mailer.send()
     } catch (err) {
       res.status(400).send()
     }
