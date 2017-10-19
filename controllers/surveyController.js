@@ -11,15 +11,22 @@ const surveyController = {
         title,
         body,
         subject,
-        recipients: recipients.split(',').map(email => ({ email })),
-        _user: req.user.id,
+        recipients: recipients.split(', ').map(email => ({ email })),
+        _owner: req.user.id,
         dateSent: Date.now()
       })
 
+      // send mail & update database
       const mailer = new Mailer(survey, surveyTemplate(survey))
-      mailer.send()
+      await mailer.send()
+      await survey.save()
+
+      req.user.credits -= 1
+      const user = await req.user.save()
+
+      res.send(user)
     } catch (err) {
-      res.status(400).send()
+      res.status(422).send(err)
     }
   }
 }
