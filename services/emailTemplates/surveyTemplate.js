@@ -1,3 +1,5 @@
+const { redirectDomain } = require('../../config/keys')
+
 // TODO: move to color / styles file
 const btnClass = color => ({
   'display': 'inline-block',
@@ -34,14 +36,14 @@ module.exports = (survey) => {
           <p>Please answer the following question:</p>
           <p>${survey.body}</p>
           <div>
-            <a href="http://localhost:3000"
+            <a href="${redirectDomain}/api/surveys/thanks"
             style="
               ${styleToInline(btnClass(blue))}
             ">
             Yes</a>
           </div>
           <div>
-            <a href="http://localhost:3000"
+            <a href="${redirectDomain}/api/surveys/thanks"
             style="
               ${styleToInline(btnClass(red))}
             ">

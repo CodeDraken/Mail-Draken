@@ -3,6 +3,10 @@ const Mailer = require('../services/Mailer')
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 
 const surveyController = {
+  feedback (req, res) {
+    res.send('Thanks for the feedback!')
+  },
+
   // create survey & send
   async newSurvey (req, res) {
     try {
