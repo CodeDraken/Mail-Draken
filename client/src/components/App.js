@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { BrowserRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import * as actions from '../actions'
 import routes from './routes'
 import Header from './Header'
-import * as actions from '../actions'
 
 class App extends Component {
   static propTypes = {
