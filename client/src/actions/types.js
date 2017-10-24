@@ -1,1 +1,2 @@
 export const GET_CURRENT_USER = 'GET_CURRENT_USER'
+export const SUBMIT_SURVEY = 'SUBMIT_SURVEY'

@@ -1,5 +1,6 @@
 // wrapper for SurveyForm and SurveyFormReview
 import React, { Component } from 'react'
+import { reduxForm } from 'redux-form'
 
 import SurveyForm from './SurveyForm'
 import SurveyFormReview from './SurveyFormReview'
@@ -28,4 +29,7 @@ export class SurveyNew extends Component {
   }
 }
 
-export default SurveyNew
+// clear values when leave
+export default reduxForm({
+  form: 'surveyForm'
+})(SurveyNew)

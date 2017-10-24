@@ -15,3 +15,7 @@ export const handleStripeToken = token => async dispatch => {
   // server will send back updated user with credits
   dispatch({ type: GET_CURRENT_USER, payload: res.data })
 }
+
+export const submitSurvey = values => {
+  return { type: 'submit_survey' }
+}
