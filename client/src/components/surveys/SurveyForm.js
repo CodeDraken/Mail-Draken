@@ -19,6 +19,7 @@ export class SurveyForm extends Component {
       key={field.name}
       component={SurveyField}
       type='text'
+      _name={field.name}
       {...field}
     />
   ))
@@ -27,7 +28,7 @@ export class SurveyForm extends Component {
     return (
       <div>
         <form
-          onSubmit={this.props.handleSubmit(values => console.log(values))}
+          onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
         >
           { this.renderFields() }
 
@@ -44,7 +45,7 @@ export class SurveyForm extends Component {
   }
 }
 
-const validate = (values) => {
+const validate = values => {
   const errors = {}
 
   errors.recipients = validateEmailList(values.recipients || '')
@@ -61,5 +62,6 @@ const validate = (values) => {
 
 export default reduxForm({
   form: 'surveyForm',
+  destroyOnUnmount: false,
   validate
 })(SurveyForm)
