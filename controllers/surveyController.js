@@ -15,7 +15,10 @@ const surveyController = {
         title,
         body,
         subject,
-        recipients: recipients.split(', ').map(email => ({ email })),
+        recipients: recipients
+          .split(',')
+          .map(email => email.trim())
+          .map(email => ({ email })),
         _owner: req.user.id,
         dateSent: Date.now()
       })

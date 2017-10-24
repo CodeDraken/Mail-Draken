@@ -4,6 +4,7 @@ import { reduxForm, Field } from 'redux-form'
 import { Link } from 'react-router-dom'
 
 import SurveyField from './SurveyField'
+import validateEmailList from '../../utils/validateEmailList'
 
 const FIELDS = [
   { label: 'Survey Title', name: 'title' },
@@ -45,12 +46,13 @@ export class SurveyForm extends Component {
 
 const validate = (values) => {
   const errors = {}
-  const fields = [ 'body', 'recipients', 'subject', 'title' ]
+
+  errors.recipients = validateEmailList(values.recipients || '')
 
   // make sure no empty
-  fields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = `You must fill out the ${field} field`
+  FIELDS.forEach(({ name }) => {
+    if (!values[name]) {
+      errors[name] = `You must fill out the ${name} field`
     }
   })
 
