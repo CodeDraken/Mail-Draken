@@ -5,7 +5,7 @@ export default ({ input, label, _name, meta: { error, touched } }) => {
   const valid = touched && error ? 'invalid' : ''
 
   return (
-    <div className='input-field'>
+    <div>
       <label htmlFor={_name}>
         { label }
       </label>

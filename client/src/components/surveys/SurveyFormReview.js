@@ -1,40 +1,34 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import formFields from './formFields'
+
 const SurveyFormReview = ({ onCancel, values }) => {
+  const reviewFields = formFields.map(({ name, label }) => (
+    <div key={name}>
+      <label>{ label }</label>
+      <div>
+        { values[name] }
+      </div>
+    </div>
+  ))
+
   return (
     <div>
       <h5>Confirm entries</h5>
 
-      <div>
-        <div>
-          <label>Survey Title</label>
-          <div>{values.title}</div>
-        </div>
-        <div>
-          <label>Email Subject</label>
-          <div>{values.subject}</div>
-        </div>
-        <div>
-          <label>Email Body</label>
-          <div>{values.body}</div>
-        </div>
-        <div>
-          <label>Recipient List</label>
-          <div>{values.recipients}</div>
-        </div>
-      </div>
+      { reviewFields }
 
       <button
-        className='red btn-flat white-text'
+        className='orange btn-flat white-text'
         onClick={onCancel}
       >
-        Cancel
+        Back
       </button>
 
-      <button className='teal btn-flat right white-text'>
-        Create survey
-        <i className='material-icons right'>done</i>
+      <button className='green btn-flat right white-text'>
+        Send Survey
+        <i className='material-icons right'>email</i>
       </button>
     </div>
   )

@@ -5,16 +5,10 @@ import { Link } from 'react-router-dom'
 
 import SurveyField from './SurveyField'
 import validateEmailList from '../../utils/validateEmailList'
-
-const FIELDS = [
-  { label: 'Survey Title', name: 'title' },
-  { label: 'Email Subject', name: 'subject' },
-  { label: 'Email Body', name: 'body' },
-  { label: 'Recipient List', name: 'recipients' }
-]
+import formFields from './formFields'
 
 export class SurveyForm extends Component {
-  renderFields = () => FIELDS.map(field => (
+  renderFields = () => formFields.map(field => (
     <Field
       key={field.name}
       component={SurveyField}
@@ -51,7 +45,7 @@ const validate = values => {
   errors.recipients = validateEmailList(values.recipients || '')
 
   // make sure no empty
-  FIELDS.forEach(({ name }) => {
+  formFields.forEach(({ name }) => {
     if (!values[name]) {
       errors[name] = `You must fill out the ${name} field`
     }
