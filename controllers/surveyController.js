@@ -3,6 +3,13 @@ const Mailer = require('../services/Mailer')
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 
 const surveyController = {
+  webhooks: {
+    sendGrid (req, res) {
+      console.log(req.body)
+      res.send({})
+    }
+  },
+
   feedback (req, res) {
     res.send('Thanks for the feedback!')
   },
@@ -36,6 +43,7 @@ const surveyController = {
       res.status(422).send(err)
     }
   }
+
 }
 
 module.exports = surveyController
