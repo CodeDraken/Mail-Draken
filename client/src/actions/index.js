@@ -1,21 +1,40 @@
 import axios from 'axios'
 
-import { GET_CURRENT_USER } from './types'
+import { GET_CURRENT_USER, SUBMIT_SURVEY } from './types'
 
 // get the logged in user's data
 export const getCurrentUser = () => async dispatch => {
-  const res = await axios.get('/api/current_user')
+  try {
+    const res = await axios.get('/api/current_user')
 
-  dispatch({ type: GET_CURRENT_USER, payload: res.data })
+    dispatch({ type: GET_CURRENT_USER, payload: res.data })
+  } catch (err) {
+    console.log(err)
+    // TODO: dispatch failed get user
+  }
 }
 
 export const handleStripeToken = token => async dispatch => {
-  const res = await axios.post('/api/stripe', token)
+  try {
+    const res = await axios.post('/api/stripe', token)
 
-  // server will send back updated user with credits
-  dispatch({ type: GET_CURRENT_USER, payload: res.data })
+    // server will send back updated user with credits
+    dispatch({ type: GET_CURRENT_USER, payload: res.data })
+  } catch (err) {
+    console.log(err)
+    // TODO: dispatch failed token
+  }
 }
 
-export const submitSurvey = values => {
-  return { type: 'submit_survey' }
+export const submitSurvey = (values, history) => async dispatch => {
+  try {
+    const res = await axios.post('/api/surveys', values)
+
+    history.push('/surveys')
+
+    // get updated user
+    dispatch({ type: GET_CURRENT_USER, payload: res.data })
+  } catch (err) {
+    console.log(err)
+  }
 }
