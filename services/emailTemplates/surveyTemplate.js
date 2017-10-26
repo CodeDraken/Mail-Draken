@@ -36,14 +36,14 @@ module.exports = (survey) => {
           <p>Please answer the following question:</p>
           <p>${survey.body}</p>
           <div>
-            <a href="${redirectDomain}/api/surveys/thanks"
+            <a href="${redirectDomain}/api/surveys/${survey.id}/yes"
             style="
               ${styleToInline(btnClass(blue))}
             ">
             Yes</a>
           </div>
           <div>
-            <a href="${redirectDomain}/api/surveys/thanks"
+            <a href="${redirectDomain}/api/surveys/${survey.id}/no"
             style="
               ${styleToInline(btnClass(red))}
             ">

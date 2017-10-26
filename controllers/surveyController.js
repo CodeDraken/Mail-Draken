@@ -1,3 +1,7 @@
+const _ = require('lodash')
+const Path = require('path-parser')
+const { URL } = require('url')
+
 const { Survey } = require('../models')
 const Mailer = require('../services/Mailer')
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
@@ -5,7 +9,25 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate')
 const surveyController = {
   webhooks: {
     sendGrid (req, res) {
-      console.log(req.body)
+      const p = new Path('/api/surveys/:surveyId/:choice')
+
+      // get clicked events
+      let clickedMail = req.body
+        .filter(({ url, event }) => url && event === 'click')
+        .map(({ url, email }) => {
+          const match = p.test(new URL(url).pathname)
+
+          return match
+            ? { email, surveyId: match.surveyId, choice: match.choice }
+            : null
+        })
+        .filter(result => result !== null)
+
+      // remove any duplicate votes by user for same survey
+      clickedMail = _.uniqBy(clickedMail, 'email', 'surveyId')
+
+      console.log('click events', clickedMail)
+
       res.send({})
     }
   },
