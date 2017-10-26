@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const Path = require('path-parser')
 const { URL } = require('url')
+const mongoose = require('mongoose')
 
 const { Survey } = require('../models')
 const Mailer = require('../services/Mailer')
@@ -12,7 +13,7 @@ const surveyController = {
       const p = new Path('/api/surveys/:surveyId/:choice')
 
       // get clicked events
-      let clickedMail = req.body
+      let events = req.body
         .filter(({ url, event }) => url && event === 'click')
         .map(({ url, email }) => {
           const match = p.test(new URL(url).pathname)
@@ -24,10 +25,26 @@ const surveyController = {
         .filter(result => result !== null)
 
       // remove any duplicate votes by user for same survey
-      clickedMail = _.uniqBy(clickedMail, 'email', 'surveyId')
+      events = _.uniqBy(events, 'email', 'surveyId')
 
-      console.log('click events', clickedMail)
+      // findAndUpdate data
+      events.forEach(({ email, surveyId, choice }) => {
+        Survey.updateOne({
+          _id: surveyId,
+          recipients: {
+            $elemMatch: { email, responded: false }
+          }
+        }, {
+          $inc: { [choice]: 1 },
+          $set: { 'recipients.$.responded': true },
+          lastResponded: new Date()
+        })
+        .exec()
+      })
 
+      console.log('events', events)
+
+      // send whatever back to sendgrid
       res.send({})
     }
   },

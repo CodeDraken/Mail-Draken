@@ -3,7 +3,7 @@ const requireLogin = require('../middleware/requireLogin')
 const requireCredits = require('../middleware/requireCredits')
 
 module.exports = app => {
-  app.get('/api/surveys/thanks', surveyController.feedback)
+  app.get('/api/surveys/:surveyId/:choice', surveyController.feedback)
 
   app.post('/api/surveys/webhooks/sendgrid', surveyController.webhooks.sendGrid)
 
