@@ -8,4 +8,6 @@ module.exports = app => {
   app.post('/api/surveys/webhooks/sendgrid', surveyController.webhooks.sendGrid)
 
   app.post('/api/surveys', requireLogin, requireCredits(1), surveyController.newSurvey)
+
+  app.get('/api/surveys', requireLogin, surveyController.getSurveys)
 }

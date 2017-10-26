@@ -53,6 +53,18 @@ const surveyController = {
     res.send('Thanks for the feedback!')
   },
 
+  async getSurveys (req, res) {
+    try {
+      const surveys = await Survey
+        .find({ _owner: req.user.id })
+        .select({ recipients: false })
+
+      res.send(surveys)
+    } catch (err) {
+      res.status(400).send(err)
+    }
+  },
+
   // create survey & send
   async newSurvey (req, res) {
     try {
