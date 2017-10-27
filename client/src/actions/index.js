@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { GET_CURRENT_USER, SUBMIT_SURVEY } from './types'
+import { GET_CURRENT_USER, FETCH_SURVEYS } from './types'
 
 // get the logged in user's data
 export const getCurrentUser = () => async dispatch => {
@@ -36,5 +36,17 @@ export const submitSurvey = (values, history) => async dispatch => {
     dispatch({ type: GET_CURRENT_USER, payload: res.data })
   } catch (err) {
     console.log(err)
+    // TODO: dispatch survey creation failed
+  }
+}
+
+export const fetchSurveys = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/surveys')
+
+    dispatch({ type: FETCH_SURVEYS, payload: res.data })
+  } catch (err) {
+    console.log(err)
+    // TODO: dispatch failed to fetch surveys
   }
 }
